@@ -1,0 +1,4 @@
+Django==2.0.6
+django-crispy-forms==1.7.2
+django-filter==1.1.0
+django-pure-pagination==0.3.0
