@@ -8,9 +8,8 @@ from .models import User
 @admin.register(User)
 class AdminUserAdmin(UserAdmin):
 
-    # 標準のユーザー管理より以下の点を変更
-    # full_nameを追加
-    # first_name,last_name, is_staff, groups, user_permissions を非表示
+    # first_name,last_nameを非表示にして full_nameを追加
+    # マイクロシステムに不要なパーミッション設定を非表示（is_staff, groups, user_permissions）
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
