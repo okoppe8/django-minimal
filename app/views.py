@@ -28,8 +28,6 @@ class ItemFilterView(LoginRequiredMixin, PaginationMixin, FilterView):
     https://github.com/jamespacileo/django-pure-pagination
     """
     model = Item
-    # ソート順設定
-    queryset = Item.objects.all().order_by('-updated_at')
 
     # django-filter 設定
     filterset_class = ItemFilterSet
@@ -58,6 +56,12 @@ class ItemFilterView(LoginRequiredMixin, PaginationMixin, FilterView):
                     request.GET[key] = request.session['query'][key]
 
         return super().get(request, **kwargs)
+
+    def get_queryset(self):
+        """
+        ソート順・デフォルトの絞り込みを指定
+        """
+        return Item.objects.all().order_by('-updated_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
