@@ -11,6 +11,11 @@ $(function () {
         $('#myform').submit();
     })
 
+    // 削除ボタンの２度押しを防止
+    $('.delete').on('click', function (e) {
+        $('.delete').addClass('disabled');
+    })
+
     // [検索を解除] の表示制御
     //
     // 検索フォーム内の項目が一つでも入力されていたら、検索中と見なし
