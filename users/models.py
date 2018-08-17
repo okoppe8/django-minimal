@@ -4,20 +4,32 @@ from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
-    # 名前の追加
+    """
+    カスタムユーザー データ定義クラス
+      電話番号などを追加したい場合はこのクラスに追加します。
+    """
+
+    # first_name、last_nameは利用せずにfull_nameを使う
     full_name = models.CharField(
         verbose_name='名前',
         max_length=100,
         blank=True
     )
 
-    # 既存メソッドの変更
-    def get_full_name(self):
-        return self.full_name
-
-    # スタッフ権限のデフォルトをTrueに変更
+    # このアプリケーションでは利用にあたってログイン必須という前提である。
+    # このためスタッフ権限のデフォルトはTrueに変更する
     is_staff = models.BooleanField(
         _('staff status'),
         default=True,
-        help_text=_('Designates whether the user can log into this admin site.'),
     )
+
+    # get_full_name()のオーバーライド
+    def get_full_name(self):
+        if self.full_name:
+            return self.full_name
+        else:
+            return self.username + '（名前未設定）'
+
+    # 管理画面・リストボックス表示
+    def __str__(self):
+        return self.get_full_name()
