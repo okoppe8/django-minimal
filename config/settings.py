@@ -194,8 +194,3 @@ LOGGING = {
         },
     }
 }
-
-# Heroku用設定を有効化
-if os.environ.get('DYNO'):
-    import django_heroku
-    django_heroku.settings(locals())
