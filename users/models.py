@@ -6,30 +6,33 @@ from django.utils.translation import gettext_lazy as _
 class User(AbstractUser):
     """
     カスタムユーザー データ定義クラス
-      電話番号などを追加したい場合はこのクラスに追加します。
+
+    ユーザーの管理項目を増やしたい場合はここにフィールドを定義します。
+    例：住所、電話番号など
     """
 
-    # first_name、last_nameは利用せずにfull_nameを使う
+    # first_name、last_nameの代わりにfull_nameを用意する
     full_name = models.CharField(
         verbose_name='名前',
         max_length=100,
         blank=True
     )
 
-    # このアプリケーションでは利用にあたってログイン必須という前提である。
-    # このためスタッフ権限のデフォルトはTrueに変更する
+    # スタッフ権限のデフォルトをTrueに変更する
+    # ※アプリケーション全体にアクセス制限をかけるならTrueにした方が利便性が良い。
+    #   そうじゃない仕様ならこのコードを削除すること。
     is_staff = models.BooleanField(
         _('staff status'),
         default=True,
     )
 
-    # get_full_name()のオーバーライド
+    # get_full_name()の変更
     def get_full_name(self):
         if self.full_name:
             return self.full_name
         else:
             return self.username + '（名前未設定）'
 
-    # 管理画面・リストボックス表示
+    # 選択リストでの表示
     def __str__(self):
         return self.get_full_name()
