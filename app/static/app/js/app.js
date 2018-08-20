@@ -1,6 +1,7 @@
 $(function () {
 
     // 入力フォームでリターンキー押下時の送信を無効化
+    // ※フィールド１個の時は無効
     $('#myform').on('sumbit', function (e) {
         e.preventDefault();
     })
