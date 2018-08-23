@@ -1,4 +1,5 @@
 from django.db import models
+from django_google_maps import fields as map_fields
 
 from users.models import User
 
@@ -20,29 +21,35 @@ class Item(models.Model):
 
     created_by = models.ForeignKey(
         User,
+        verbose_name='作成者',
+        blank=True,
         null=True,
         related_name='CreatedBy',
         on_delete=models.CASCADE,
-        verbose_name='作成者',
         editable=False,
     )
 
     created_at = models.DateTimeField(
         verbose_name='作成時間',
+        blank=True,
+        null=True,
         editable=False,
     )
 
     updated_by = models.ForeignKey(
         User,
+        verbose_name='更新者',
+        blank=True,
         null=True,
         related_name='UpdatedBy',
         on_delete=models.CASCADE,
-        verbose_name='更新者',
         editable=False,
     )
 
     updated_at = models.DateTimeField(
         verbose_name='更新時間',
+        blank=True,
+        null=True,
         editable=False,
     )
 
