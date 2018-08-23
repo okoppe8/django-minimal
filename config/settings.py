@@ -185,11 +185,11 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
-        # 発行されるSQLを出力する
+        # SQL出力
         'django.db.backends': {
             'handlers': ['console'],
-            # DEBUGで出力、INFOで出力停止
-            'level': 'DEBUG',
+            # DEBUGで出力ON、INFOでOFF
+            'level': 'INFO',
             'propagate': False,
         },
     }
