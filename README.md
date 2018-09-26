@@ -1,19 +1,17 @@
 instant-django
 ====
 
-Overview
-
 Instant-django is a practical sample project of Django.
+
+Instant-django has a sample model and basic CRUD views.
+
+You can complete a simple CRUD WebApp with a few edits and commands.
+
 
 日本語での使い方の説明は以下の記事を参照してください。
 
 http://qiita.com/okoppe8/dummy
 
-## Description
-
-Instant-django has a sample model and basic CRUD views.
-
-You can complete a simple CRUD WebApp with a few edits and commands.
 
 ## Requirement
 
