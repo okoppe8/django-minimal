@@ -19,6 +19,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# 本番運用時は別の値に置き換えること。
+# 生成ツール：https://www.miniwebtool.com/django-secret-key-generator/
 SECRET_KEY = '_(u)&e-3076d7_a(gfhb85*)u-u4vwc%#qt7c7q3-t98%lvp&g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -36,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'pure_pagination',
     'users.apps.UsersConfig',
     'app.apps.AppConfig',
 ]
@@ -128,17 +129,6 @@ LOGOUT_REDIRECT_URL = '/'
 # django-crispy-forms
 # https://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-# django-pure-pagination
-# https://github.com/jamespacileo/django-pure-pagination#settings
-PAGINATION_SETTINGS = {
-    # ページネーション 中央個数
-    'PAGE_RANGE_DISPLAYED': 2,
-    # ページネーション 端個数
-    'MARGIN_PAGES_DISPLAYED': 1,
-    # 不正ページへのアクセス時
-    'SHOW_FIRST_PAGE_WHEN_INVALID': True,
-}
 
 
 # django-filter

@@ -5,27 +5,24 @@ from django.utils import timezone
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
-from pure_pagination.mixins import PaginationMixin
 
 from .filters import ItemFilterSet
 from .forms import ItemForm
 from .models import Item
 
 
-# LoginRequiredMixin
+# 未ログインのユーザーにアクセスを許可する場合は、LoginRequiredMixinを継承から外してください。
 #
-# 未ログインのユーザーをログイン画面に誘導するMixin
+# LoginRequiredMixin：未ログインのユーザーをログイン画面に誘導するMixin
 # 参考：https://docs.djangoproject.com/ja/2.1/topics/auth/default/#the-loginrequired-mixin
 
-class ItemFilterView(LoginRequiredMixin, PaginationMixin, FilterView):
+class ItemFilterView(LoginRequiredMixin, FilterView):
     """
     ビュー：一覧表示画面
 
     以下のパッケージを使用
     ・django-filter 一覧画面(ListView)に検索機能を追加
     https://django-filter.readthedocs.io/en/master/
-    ・django-pure-pagination 一覧画面(ListView)ページネーション処理を追加
-    https://github.com/jamespacileo/django-pure-pagination
     """
     model = Item
 
@@ -34,9 +31,7 @@ class ItemFilterView(LoginRequiredMixin, PaginationMixin, FilterView):
     # django-filter ver2.0対応 クエリ未設定時に全件表示する設定
     strict = False
 
-    # pure_pagination 設定
-    object = Item
-    # １ページ 10件づつ
+    # 1ページの表示
     paginate_by = 10
 
     def get(self, request, **kwargs):
@@ -61,14 +56,15 @@ class ItemFilterView(LoginRequiredMixin, PaginationMixin, FilterView):
         """
         ソート順・デフォルトの絞り込みを指定
         """
-        return Item.objects.all().order_by('-updated_at')
+        # デフォルトの並び順として、登録時間（降順）をセットする。
+        return Item.objects.all().order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
         表示データの設定
         """
-        # 表示データの追加はここで 例：
-        # kwargs['sample'] = 'sample'
+        # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
+        # 例：kwargs['sample'] = 'sample'
         return super().get_context_data(object_list=object_list, **kwargs)
 
 

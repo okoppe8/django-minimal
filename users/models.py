@@ -13,14 +13,14 @@ class User(AbstractUser):
 
     # first_name、last_nameの代わりにfull_nameを用意する
     full_name = models.CharField(
-        verbose_name='名前',
+        verbose_name='氏名',
         max_length=100,
         blank=True
     )
 
     # スタッフ権限のデフォルトをTrueに変更する
-    # ※アプリケーション全体にアクセス制限をかけるならTrueにした方が利便性が良い。
-    #   そうじゃない仕様ならこのコードを削除すること。
+    # ※ 原則ログインして利用することを想定している。
+
     is_staff = models.BooleanField(
         _('staff status'),
         default=True,
@@ -31,7 +31,7 @@ class User(AbstractUser):
         if self.full_name:
             return self.full_name
         else:
-            return self.username + '（名前未設定）'
+            return self.username + '（氏名未登録）'
 
     # 選択リストでの表示
     def __str__(self):

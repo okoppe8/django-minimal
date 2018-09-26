@@ -22,7 +22,7 @@ urlpatterns = [
     path('', include('app.urls')),
 ]
 
-# 管理サイトの表示設定
+# 管理サイトの見出しを変更可能
 #  タイトル；タイトルタグで使用
 admin.site.site_title = 'タイトル'
 #  サイト名：ログイン画面と管理画面上部の表示
